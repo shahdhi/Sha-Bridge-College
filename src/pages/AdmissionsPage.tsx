@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { 
+import {
   DocumentTextIcon,
   CalendarIcon,
   CheckCircleIcon,
-  CurrencyDollarIcon,
   AcademicCapIcon,
   UserIcon,
   PhoneIcon,
@@ -53,20 +52,6 @@ const AdmissionsPage: React.FC<AdmissionsPageProps> = ({ onPageChange }) => {
     }
   ];
 
-  const requirements = [
-    "Basic language proficiency assessment",
-    "Completed application form",
-    "Copy of ID or passport",
-    "Previous education certificates"
-  ];
-
-  const programs = [
-    "Japanese Proficiency (JLPT N1-N5)",
-    "English Proficiency Training",
-    "Individual Language Coaching",
-    "Professional Development Program"
-  ];
-
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
@@ -77,17 +62,17 @@ const AdmissionsPage: React.FC<AdmissionsPageProps> = ({ onPageChange }) => {
     e.preventDefault();
     console.log('Form submitted:', formData);
     alert('Application submitted successfully! We will contact you within 2 business days.');
-    // Reset form fields
-  setFormData({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    program: '',
-    educationLevel: '',
-    message: ''
-  });
-};
+    setFormData({
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      program: '',
+      educationLevel: '',
+      message: ''
+    });
+  };
+
   return (
     <div className="pt-16 min-h-screen">
       {/* Hero Section */}
@@ -238,154 +223,107 @@ const AdmissionsPage: React.FC<AdmissionsPageProps> = ({ onPageChange }) => {
               </div>
             </motion.div>
 
-            {/* Application Form */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
+      {/* Application Form */}
+      <section className="py-20 bg-white">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-center mb-8 text-gray-900">Apply Now</h2>
+          <form
+            name="admission"
+            method="POST"
+            data-netlify="true"
+            netlify-honeypot="bot-field"
+            onSubmit={handleSubmit}
+            className="space-y-6"
+          >
+            {/* Hidden Inputs for Netlify */}
+            <input type="hidden" name="form-name" value="admission" />
+            <input type="text" name="bot-field" style={{ display: 'none' }} />
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <input
+                type="text"
+                name="firstName"
+                placeholder="First Name"
+                value={formData.firstName}
+                onChange={handleInputChange}
+                required
+                className="border p-3 rounded"
+              />
+              <input
+                type="text"
+                name="lastName"
+                placeholder="Last Name"
+                value={formData.lastName}
+                onChange={handleInputChange}
+                required
+                className="border p-3 rounded"
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={formData.email}
+                onChange={handleInputChange}
+                required
+                className="border p-3 rounded"
+              />
+              <input
+                type="tel"
+                name="phone"
+                placeholder="Phone Number"
+                value={formData.phone}
+                onChange={handleInputChange}
+                required
+                className="border p-3 rounded"
+              />
+              <select
+                name="program"
+                value={formData.program}
+                onChange={handleInputChange}
+                required
+                className="border p-3 rounded"
+              >
+                <option value="">Select Program</option>
+                <option value="Japanese Proficiency">Japanese Proficiency (JLPT N1-N5)</option>
+                <option value="English Proficiency">English Proficiency Training</option>
+                <option value="Language Coaching">Individual Language Coaching</option>
+                <option value="Professional Development">Professional Development Program</option>
+              </select>
+              <select
+                name="educationLevel"
+                value={formData.educationLevel}
+                onChange={handleInputChange}
+                required
+                className="border p-3 rounded"
+              >
+                <option value="">Education Level</option>
+                <option value="High School">High School</option>
+                <option value="Undergraduate">Undergraduate</option>
+                <option value="Graduate">Graduate</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <textarea
+              name="message"
+              placeholder="Tell us about your goals or questions"
+              value={formData.message}
+              onChange={handleInputChange}
+              rows={5}
+              className="border p-3 rounded w-full"
+            />
+
+            <button
+              type="submit"
+              className="bg-blue-800 text-white px-6 py-3 rounded hover:bg-blue-700 transition"
             >
-              <div className="bg-white rounded-2xl p-8 shadow-lg">
-                <h2 className="text-3xl font-bold text-gray-900 mb-2">Apply Now</h2>
-                <p className="text-gray-600 mb-8">Take the first step towards your transformation</p>
-
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
-                        <UserIcon className="h-4 w-4 mr-2" />
-                        First Name
-                      </label>
-                      <input
-                        type="text"
-                        name="firstName"
-                        value={formData.firstName}
-                        onChange={handleInputChange}
-                        required
-                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                      />
-                    </div>
-                    <div>
-                      <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
-                        <UserIcon className="h-4 w-4 mr-2" />
-                        Last Name
-                      </label>
-                      <input
-                        type="text"
-                        name="lastName"
-                        value={formData.lastName}
-                        onChange={handleInputChange}
-                        required
-                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
-                      <EnvelopeIcon className="h-4 w-4 mr-2" />
-                      Email Address
-                    </label>
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
-                      <PhoneIcon className="h-4 w-4 mr-2" />
-                      Phone Number
-                    </label>
-                    <input
-                      type="tel"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
-                      <AcademicCapIcon className="h-4 w-4 mr-2" />
-                      Program of Interest
-                    </label>
-                    <select
-                      name="program"
-                      value={formData.program}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                    >
-                      <option value="">Select a program</option>
-                      {programs.map((program) => (
-                        <option key={program} value={program}>
-                          {program}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="text-sm font-medium text-gray-700 mb-2 block">
-                      Current Education Level
-                    </label>
-                    <select
-                      name="educationLevel"
-                      value={formData.educationLevel}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                    >
-                      <option value="">Select your education level</option>
-                      <option value="other">Ordinary Level</option>
-                      <option value="high-school">High School</option>
-                      <option value="some-college">Some College</option>
-                      <option value="bachelors">Bachelor's Degree</option>
-                      <option value="masters">Master's Degree</option>
-                      <option value="other">Other</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="text-sm font-medium text-gray-700 mb-2 block">
-                      Additional Information
-                    </label>
-                    <textarea
-                      name="message"
-                      value={formData.message}
-                      onChange={handleInputChange}
-                      rows={4}
-                      placeholder="Tell us about your goals and why you want to join Sha Bridge College..."
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                    />
-                  </div>
-
-                  <motion.button
-                    whileHover={{ scale: 1.02, y: -2 }}
-                    whileTap={{ scale: 0.98 }}
-                    type="submit"
-                    className="w-full bg-blue-800 text-white py-4 rounded-lg font-semibold text-lg hover:bg-blue-900 transition-colors duration-300 shadow-lg"
-                  >
-                    Submit Application
-                  </motion.button>
-                </form>
-
-                <p className="text-sm text-gray-600 text-center mt-6">
-                  Questions? <button onClick={() => onPageChange('contact')} className="text-blue-600 hover:text-blue-800 font-medium">Contact our admissions team</button>
-                </p>
-              </div>
-            </motion.div>
-          </div>
+              Submit Application
+            </button>
+          </form>
         </div>
       </section>
     </div>
   );
 };
 
-export default AdmissionsPage;
+export default AdmissionsPage
