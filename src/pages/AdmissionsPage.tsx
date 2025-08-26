@@ -174,22 +174,26 @@ const AdmissionsPage: React.FC<AdmissionsPageProps> = ({ onPageChange }) => {
       </section>
 
       {/* Application Form */}
-      <section className="py-20 bg-white">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-8 text-gray-900">Apply Now</h2>
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-center mb-2 text-gray-900">Apply Now</h2>
+          <p className="text-center text-gray-600 mb-8 text-lg">
+            Take the first step towards your transformation
+          </p>
+
           <form
             name="admission"
             method="POST"
             data-netlify="true"
             netlify-honeypot="bot-field"
             onSubmit={handleSubmit}
-            className="space-y-6"
+            className="bg-white shadow-md rounded-lg p-6 space-y-6"
           >
-            {/* Hidden Inputs for Netlify */}
             <input type="hidden" name="form-name" value="admission" />
             <input type="text" name="bot-field" style={{ display: 'none' }} />
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="flex items-center border rounded p-3">
+              <UserIcon className="h-5 w-5 text-gray-400 mr-3" />
               <input
                 type="text"
                 name="firstName"
@@ -197,8 +201,12 @@ const AdmissionsPage: React.FC<AdmissionsPageProps> = ({ onPageChange }) => {
                 value={formData.firstName}
                 onChange={handleInputChange}
                 required
-                className="border p-3 rounded"
+                className="w-full outline-none"
               />
+            </div>
+
+            <div className="flex items-center border rounded p-3">
+              <UserIcon className="h-5 w-5 text-gray-400 mr-3" />
               <input
                 type="text"
                 name="lastName"
@@ -206,17 +214,25 @@ const AdmissionsPage: React.FC<AdmissionsPageProps> = ({ onPageChange }) => {
                 value={formData.lastName}
                 onChange={handleInputChange}
                 required
-                className="border p-3 rounded"
+                className="w-full outline-none"
               />
+            </div>
+
+            <div className="flex items-center border rounded p-3">
+              <EnvelopeIcon className="h-5 w-5 text-gray-400 mr-3" />
               <input
                 type="email"
                 name="email"
-                placeholder="Email"
+                placeholder="Email Address"
                 value={formData.email}
                 onChange={handleInputChange}
                 required
-                className="border p-3 rounded"
+                className="w-full outline-none"
               />
+            </div>
+
+            <div className="flex items-center border rounded p-3">
+              <PhoneIcon className="h-5 w-5 text-gray-400 mr-3" />
               <input
                 type="tel"
                 name="phone"
@@ -224,27 +240,35 @@ const AdmissionsPage: React.FC<AdmissionsPageProps> = ({ onPageChange }) => {
                 value={formData.phone}
                 onChange={handleInputChange}
                 required
-                className="border p-3 rounded"
+                className="w-full outline-none"
               />
+            </div>
+
+            <div className="flex items-center border rounded p-3">
+              <DocumentTextIcon className="h-5 w-5 text-gray-400 mr-3" />
               <select
                 name="program"
                 value={formData.program}
                 onChange={handleInputChange}
                 required
-                className="border p-3 rounded"
+                className="w-full outline-none bg-transparent"
               >
-                <option value="">Select Program</option>
+                <option value="">Program of Interest</option>
                 <option value="Japanese Proficiency">Japanese Proficiency (JLPT N1-N5)</option>
                 <option value="English Proficiency">English Proficiency Training</option>
                 <option value="Language Coaching">Individual Language Coaching</option>
                 <option value="Professional Development">Professional Development Program</option>
               </select>
+            </div>
+
+            <div className="flex items-center border rounded p-3">
+              <AcademicCapIcon className="h-5 w-5 text-gray-400 mr-3" />
               <select
                 name="educationLevel"
                 value={formData.educationLevel}
                 onChange={handleInputChange}
                 required
-                className="border p-3 rounded"
+                className="w-full outline-none bg-transparent"
               >
                 <option value="">Education Level</option>
                 <option value="High School">High School</option>
@@ -260,12 +284,12 @@ const AdmissionsPage: React.FC<AdmissionsPageProps> = ({ onPageChange }) => {
               value={formData.message}
               onChange={handleInputChange}
               rows={5}
-              className="border p-3 rounded w-full"
+              className="border rounded p-3 w-full resize-none"
             />
 
             <button
               type="submit"
-              className="bg-blue-800 text-white px-6 py-3 rounded hover:bg-blue-700 transition"
+              className="bg-blue-800 text-white px-6 py-3 rounded w-full hover:bg-blue-700 transition"
             >
               Submit Application
             </button>
@@ -276,4 +300,4 @@ const AdmissionsPage: React.FC<AdmissionsPageProps> = ({ onPageChange }) => {
   );
 };
 
-export default AdmissionsPage;
+export default AdmissionsPage
