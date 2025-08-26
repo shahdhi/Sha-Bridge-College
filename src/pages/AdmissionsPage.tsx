@@ -33,19 +33,32 @@ const AdmissionsPage: React.FC<AdmissionsPageProps> = ({ onPageChange }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    setShowSuccessModal(true);
-    setFormData({
-      firstName: '',
-      lastName: '',
-      email: '',
-      phone: '',
-      program: '',
-      educationLevel: '',
-      message: ''
-    });
+
+    const form = e.target as HTMLFormElement;
+    const formDataObj = new FormData(form);
+
+    try {
+      await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formDataObj as any).toString()
+      });
+
+      setShowSuccessModal(true);
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        program: '',
+        educationLevel: '',
+        message: ''
+      });
+    } catch (error) {
+      console.error('Form submission error:', error);
+    }
   };
 
   return (
@@ -73,7 +86,7 @@ const AdmissionsPage: React.FC<AdmissionsPageProps> = ({ onPageChange }) => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex flex-wrap justify-center gap-6 text-lg"
+            className="flex flex-wrap justify-center items-center gap-6 text-lg"
           >
             <div className="flex items-center">
               <CheckCircleIcon className="h-6 w-6 text-green-400 mr-2" />
@@ -102,6 +115,7 @@ const AdmissionsPage: React.FC<AdmissionsPageProps> = ({ onPageChange }) => {
           <form
             name="admission"
             method="POST"
+            action="/"
             data-netlify="true"
             netlify-honeypot="bot-field"
             onSubmit={handleSubmit}
@@ -228,7 +242,7 @@ const AdmissionsPage: React.FC<AdmissionsPageProps> = ({ onPageChange }) => {
                   className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition"
                 >
                   Return to homepage
-                </a>
+                </a>              
               </div>
             </div>
           )}
