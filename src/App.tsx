@@ -70,7 +70,7 @@ function App() {
                 Building bridges to brighter futures through transformative education.
               </p>
               <p className="text-gray-400 text-sm">
-                © 2025 Sha Bridge College. All rights reserved.
+                © 2026 Sha Bridge College. All rights reserved.
               </p>
             </div>
 
