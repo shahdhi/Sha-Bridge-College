@@ -97,7 +97,7 @@ const AboutPage: React.FC = () => {
                 }}
                 className="absolute -bottom-6 -left-6 bg-yellow-400 text-blue-900 p-4 rounded-2xl shadow-lg"
               >
-                <div className="text-2xl font-bold">2024</div>
+                <div className="text-2xl font-bold">2016</div>
                 <div className="text-sm">Founded</div>
               </motion.div>
             </motion.div>
