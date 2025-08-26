@@ -6,6 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sha Bridge College - Empowering Futures</title> 
   </head>
+  
+  <form name="admission" netlify hidden>
+  <input type="text" name="firstName" />
+  <input type="text" name="lastName" />
+  <input type="email" name="email" />
+  <input type="tel" name="phone" />
+  <select name="program">
+    <option value="Japanese Proficiency" />
+    <option value="English Proficiency" />
+  </select>
+  <select name="educationLevel">
+    <option value="High School" />
+    <option value="Graduate" />
+  </select>
+  <textarea name="message"></textarea>
+</form>
+
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
