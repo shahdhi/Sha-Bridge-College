@@ -94,6 +94,82 @@ const AdmissionsPage: React.FC<AdmissionsPageProps> = ({ onPageChange }) => {
           >
             Join hundreds of students who have transformed their lives through our innovative diploma programs
           </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="flex flex-wrap justify-center gap-6 text-lg"
+          >
+            <div className="flex items-center">
+              <CheckCircleIcon className="h-6 w-6 text-green-400 mr-2" />
+              <span>Simple Application Process</span>
+            </div>
+            <div className="flex items-center">
+              <CheckCircleIcon className="h-6 w-6 text-green-400 mr-2" />
+              <span>Rolling Admissions</span>
+            </div>
+            <div className="flex items-center">
+              <CheckCircleIcon className="h-6 w-6 text-green-400 mr-2" />
+              <span>Financial Aid Available</span>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Application Process */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              Simple 4-Step Application Process
+            </h2>
+            <p className="text-xl text-gray-600">
+              We've made applying to Sha Bridge College as straightforward as possible
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {steps.map((step, index) => (
+              <motion.div
+                key={step.number}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="text-center relative"
+              >
+                <motion.div
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  className="inline-flex items-center justify-center w-20 h-20 bg-blue-800 text-white rounded-full mb-6 relative z-10"
+                >
+                  <div className="absolute -top-2 -right-2 bg-yellow-400 text-blue-900 text-sm font-bold w-8 h-8 rounded-full flex items-center justify-center">
+                    {step.number}
+                  </div>
+                  {step.icon}
+                </motion.div>
+
+                {index < steps.length - 1 && (
+                  <motion.div
+                    initial={{ scaleX: 0 }}
+                    whileInView={{ scaleX: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: 0.5 + index * 0.1 }}
+                    className="hidden lg:block absolute top-10 left-1/2 w-full h-0.5 bg-blue-200 transform -translate-y-1/2 origin-left"
+                    style={{ left: 'calc(50% + 40px)', width: 'calc(100% - 80px)' }}
+                  />
+                )}
+
+                <h3 className="text-xl font-bold text-gray-900 mb-3">{step.title}</h3>
+                <p className="text-gray-600 leading-relaxed">{step.description}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
