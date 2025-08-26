@@ -25,32 +25,7 @@ const AdmissionsPage: React.FC<AdmissionsPageProps> = ({ onPageChange }) => {
     message: ''
   });
 
-  const steps = [
-    {
-      number: 1,
-      title: "Submit Application",
-      description: "Complete our online application form with your personal and educational details.",
-      icon: <DocumentTextIcon className="h-8 w-8" />
-    },
-    {
-      number: 2,
-      title: "Document Review",
-      description: "Our admissions team reviews your application and supporting documents.",
-      icon: <CheckCircleIcon className="h-8 w-8" />
-    },
-    {
-      number: 3,
-      title: "Assessment & Interview",
-      description: "Attend a language assessment and brief interview with our academic team.",
-      icon: <AcademicCapIcon className="h-8 w-8" />
-    },
-    {
-      number: 4,
-      title: "Enrollment & Orientation",
-      description: "Complete enrollment process and attend orientation to begin your journey.",
-      icon: <CalendarIcon className="h-8 w-8" />
-    }
-  ];
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -59,8 +34,9 @@ const AdmissionsPage: React.FC<AdmissionsPageProps> = ({ onPageChange }) => {
   };
 
   const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
     console.log('Form submitted:', formData);
-    alert('Application submitted successfully! We will contact you within 2 business days.');
+    setShowSuccessModal(true);
     setFormData({
       firstName: '',
       lastName: '',
@@ -115,66 +91,9 @@ const AdmissionsPage: React.FC<AdmissionsPageProps> = ({ onPageChange }) => {
         </div>
       </section>
 
-      {/* Application Process */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Simple 4-Step Application Process
-            </h2>
-            <p className="text-xl text-gray-600">
-              We've made applying to Sha Bridge College as straightforward as possible
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {steps.map((step, index) => (
-              <motion.div
-                key={step.number}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="text-center relative"
-              >
-                <motion.div
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                  className="inline-flex items-center justify-center w-20 h-20 bg-blue-800 text-white rounded-full mb-6 relative z-10"
-                >
-                  <div className="absolute -top-2 -right-2 bg-yellow-400 text-blue-900 text-sm font-bold w-8 h-8 rounded-full flex items-center justify-center">
-                    {step.number}
-                  </div>
-                  {step.icon}
-                </motion.div>
-
-                {index < steps.length - 1 && (
-                  <motion.div
-                    initial={{ scaleX: 0 }}
-                    whileInView={{ scaleX: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: 0.5 + index * 0.1 }}
-                    className="hidden lg:block absolute top-10 left-1/2 w-full h-0.5 bg-blue-200 transform -translate-y-1/2 origin-left"
-                    style={{ left: 'calc(50% + 40px)', width: 'calc(100% - 80px)' }}
-                  />
-                )}
-
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{step.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{step.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Application Form */}
       <section className="py-20 bg-gray-50">
-        <div className="w-full px-4 sm:px-6 lg:px-8">
+        <div className="max-w-xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center mb-2 text-gray-900">Apply Now</h2>
           <p className="text-center text-gray-600 mb-8 text-lg">
             Take the first step towards your transformation
@@ -185,6 +104,7 @@ const AdmissionsPage: React.FC<AdmissionsPageProps> = ({ onPageChange }) => {
             method="POST"
             data-netlify="true"
             netlify-honeypot="bot-field"
+            onSubmit={handleSubmit}
             className="bg-white shadow-md rounded-lg p-6 space-y-6"
           >
             <input type="hidden" name="form-name" value="admission" />
@@ -292,10 +212,30 @@ const AdmissionsPage: React.FC<AdmissionsPageProps> = ({ onPageChange }) => {
               Submit Application
             </button>
           </form>
+
+          {/* Success Modal */}
+          {showSuccessModal && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50">
+              <div className="bg-white rounded-lg shadow-xl p-8 max-w-md text-center">
+                <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+                  Application submitted successfully!
+                </h2>
+                <p className="text-gray-600 mb-6">
+                  We will contact you within 2 business days.
+                </p>
+                <a
+                  href="/"
+                  className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition"
+                >
+                  Return to homepage
+                </a>
+              </div>
+            </div>
+          )}
         </div>
       </section>
     </div>
   );
 };
 
-export default AdmissionsPage
+export default AdmissionsPage;
