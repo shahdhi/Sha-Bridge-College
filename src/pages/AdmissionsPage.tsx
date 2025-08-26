@@ -188,6 +188,95 @@ const AdmissionsPage: React.FC<AdmissionsPageProps> = ({ onPageChange }) => {
         </div>
       </section>
 
+      <section className="py-20 bg-gray-50">
+  <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">
+      Apply Now
+    </h2>
+    <form
+      name="admission"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      onSubmit={handleSubmit}
+      className="space-y-6"
+    >
+      <input type="hidden" name="form-name" value="admission" />
+      <input type="text" name="bot-field" style={{ display: 'none' }} />
+
+      {/* Example Form Fields */}
+      <input
+        type="text"
+        name="firstName"
+        value={formData.firstName}
+        onChange={handleInputChange}
+        placeholder="First Name"
+        required
+        className="w-full p-3 border rounded"
+      />
+      <input
+        type="text"
+        name="lastName"
+        value={formData.lastName}
+        onChange={handleInputChange}
+        placeholder="Last Name"
+        required
+        className="w-full p-3 border rounded"
+      />
+      <input
+        type="email"
+        name="email"
+        value={formData.email}
+        onChange={handleInputChange}
+        placeholder="Email"
+        required
+        className="w-full p-3 border rounded"
+      />
+      <input
+        type="phone number"
+        name="phone number"
+        value={formData.phone number}
+        onChange={handleInputChange}
+        placeholder="phone number"
+        required
+        className="w-full p-3 border rounded"
+      />
+      <input
+        type="Program of Interest"
+        name="Program of Interest"
+        value={formData.Program of Interest}
+        onChange={handleInputChange}
+        placeholder="Program of Interest"
+        required
+        className="w-full p-3 border rounded"
+      />
+       <input
+        type="Current Education Level"
+        name="Current Education Level"
+        value={formData.Current Education Level}
+        onChange={handleInputChange}
+        placeholder="Current Education Level"
+        required
+        className="w-full p-3 border rounded"
+      />
+      <input
+        type="Additional Information"
+        name="Additional Information"
+        value={formData.Additional Information}
+        onChange={handleInputChange}
+        placeholder="Additional Information"
+        required
+        className="w-full p-3 border rounded"
+      />
+      <button
+        type="submit"
+        className="bg-blue-700 text-white px-6 py-3 rounded hover:bg-blue-800 transition"
+      >
+        Submit Application
+      </button>
+    </form>
+  </div>
+
       {/* Application Form & Requirements */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
