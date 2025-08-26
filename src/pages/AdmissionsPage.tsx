@@ -86,7 +86,7 @@ const AdmissionsPage: React.FC<AdmissionsPageProps> = ({ onPageChange }) => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex flex-wrap justify-center items-center gap-6 text-lg"
+            className="flex flex-wrap justify-center gap-6 text-lg"
           >
             <div className="flex items-center">
               <CheckCircleIcon className="h-6 w-6 text-green-400 mr-2" />
@@ -104,7 +104,7 @@ const AdmissionsPage: React.FC<AdmissionsPageProps> = ({ onPageChange }) => {
         </div>
       </section>
 
-      {/* Application Form */}
+      {/* Application Process */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center mb-2 text-gray-900">Apply Now</h2>
