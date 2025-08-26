@@ -175,7 +175,7 @@ const AdmissionsPage: React.FC<AdmissionsPageProps> = ({ onPageChange }) => {
 
       {/* Application Form */}
       <section className="py-20 bg-gray-50">
-        <div className="max-w-xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center mb-2 text-gray-900">Apply Now</h2>
           <p className="text-center text-gray-600 mb-8 text-lg">
             Take the first step towards your transformation
