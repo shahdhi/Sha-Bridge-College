@@ -59,7 +59,6 @@ const AdmissionsPage: React.FC<AdmissionsPageProps> = ({ onPageChange }) => {
   };
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
     console.log('Form submitted:', formData);
     alert('Application submitted successfully! We will contact you within 2 business days.');
     setFormData({
