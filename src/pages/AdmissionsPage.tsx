@@ -186,7 +186,6 @@ const AdmissionsPage: React.FC<AdmissionsPageProps> = ({ onPageChange }) => {
             method="POST"
             data-netlify="true"
             netlify-honeypot="bot-field"
-            onSubmit={handleSubmit}
             className="bg-white shadow-md rounded-lg p-6 space-y-6"
           >
             <input type="hidden" name="form-name" value="admission" />
