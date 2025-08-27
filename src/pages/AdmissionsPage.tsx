@@ -7,12 +7,51 @@ import {
   AcademicCapIcon,
   UserIcon,
   PhoneIcon,
-  EnvelopeIcon
+  EnvelopeIcon,
+  CurrencyDollarIcon
 } from '@heroicons/react/24/outline';
 
 interface AdmissionsPageProps {
   onPageChange: (page: string) => void;
 }
+
+// Define steps data
+const steps = [
+  {
+    number: 1,
+    icon: <DocumentTextIcon className="h-8 w-8" />,
+    title: "Complete Application",
+    description: "Fill out our simple online form with your basic information"
+  },
+  {
+    number: 2,
+    icon: <CalendarIcon className="h-8 w-8" />,
+    title: "Schedule Interview",
+    description: "Meet with our admissions team to discuss your goals"
+  },
+  {
+    number: 3,
+    icon: <AcademicCapIcon className="h-8 w-8" />,
+    title: "Submit Documents",
+    description: "Provide your academic records and identification"
+  },
+  {
+    number: 4,
+    icon: <CheckCircleIcon className="h-8 w-8" />,
+    title: "Get Accepted",
+    description: "Receive your acceptance letter and start planning"
+  }
+];
+
+// Define requirements data
+const requirements = [
+  "Completed application form",
+  "High school diploma or equivalent",
+  "Official transcripts",
+  "Government-issued ID",
+  "Proof of English proficiency (if applicable)",
+  "Two passport-sized photos"
+];
 
 const AdmissionsPage: React.FC<AdmissionsPageProps> = ({ onPageChange }) => {
   const [formData, setFormData] = useState({
@@ -62,7 +101,7 @@ const AdmissionsPage: React.FC<AdmissionsPageProps> = ({ onPageChange }) => {
   };
 
   return (
-    <div className="pt-16 min-h-screen">
+    <div className="pt-16 min-h-screen bg-gray-50">
       {/* Hero Section */}
       <section className="py-20 bg-gradient-to-br from-blue-800 to-blue-900 text-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -352,12 +391,12 @@ const AdmissionsPage: React.FC<AdmissionsPageProps> = ({ onPageChange }) => {
             <p className="text-gray-600 mb-6">
               We will contact you within 2 business days.
             </p>
-            <a
-              href="/"
+            <button
+              onClick={() => setShowSuccessModal(false)}
               className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition"
             >
-              Return to homepage
-            </a>              
+              Close
+            </button>              
           </div>
         </div>
       )}
