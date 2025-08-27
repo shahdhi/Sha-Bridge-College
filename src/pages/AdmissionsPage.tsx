@@ -25,6 +25,48 @@ const AdmissionsPage: React.FC<AdmissionsPageProps> = ({ onPageChange }) => {
     message: ''
   });
 
+  const steps = [
+    {
+      number: 1,
+      title: "Submit Application",
+      description: "Complete our online application form with your personal and educational details.",
+      icon: <DocumentTextIcon className="h-8 w-8" />
+    },
+    {
+      number: 2,
+      title: "Document Review",
+      description: "Our admissions team reviews your application and supporting documents.",
+      icon: <CheckCircleIcon className="h-8 w-8" />
+    },
+    {
+      number: 3,
+      title: "Assessment & Interview",
+      description: "Attend a language assessment and brief interview with our academic team.",
+      icon: <AcademicCapIcon className="h-8 w-8" />
+    },
+    {
+      number: 4,
+      title: "Enrollment & Orientation",
+      description: "Complete enrollment process and attend orientation to begin your journey.",
+      icon: <CalendarIcon className="h-8 w-8" />
+    }
+  ];
+
+  const requirements = [
+    "Basic language proficiency assessment",
+    "Completed application form",
+    "Copy of ID or passport",
+    "Previous education certificates"
+  ];
+
+  const programs = [
+    "Japanese Proficiency (JLPT N1-N5)",
+    "English Proficiency Training",
+    "Individual Language Coaching",
+    "Professional Development Program"
+  ];
+
+
   const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const handleInputChange = (
