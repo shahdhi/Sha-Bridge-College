@@ -102,7 +102,9 @@ const AdmissionsPage: React.FC<AdmissionsPageProps> = ({ onPageChange }) => {
             </div>
           </motion.div>
         </div>
-      </section>      {/* Application Process */}
+      </section>
+
+      {/* Application Process */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -209,150 +211,156 @@ const AdmissionsPage: React.FC<AdmissionsPageProps> = ({ onPageChange }) => {
               </div>
             </motion.div>
 
-      {/* Application Process */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-2 text-gray-900">Apply Now</h2>
-          <p className="text-center text-gray-600 mb-8 text-lg">
-            Take the first step towards your transformation
-          </p>
-
-          <form
-            name="admission"
-            method="POST"
-            action="/"
-            data-netlify="true"
-            netlify-honeypot="bot-field"
-            onSubmit={handleSubmit}
-            className="bg-white shadow-md rounded-lg p-6 space-y-6"
-          >
-            <input type="hidden" name="form-name" value="admission" />
-            <input type="text" name="bot-field" style={{ display: 'none' }} />
-
-            <div className="flex items-center border rounded p-3">
-              <UserIcon className="h-5 w-5 text-gray-400 mr-3" />
-              <input
-                type="text"
-                name="firstName"
-                placeholder="First Name"
-                value={formData.firstName}
-                onChange={handleInputChange}
-                required
-                className="w-full outline-none"
-              />
-            </div>
-
-            <div className="flex items-center border rounded p-3">
-              <UserIcon className="h-5 w-5 text-gray-400 mr-3" />
-              <input
-                type="text"
-                name="lastName"
-                placeholder="Last Name"
-                value={formData.lastName}
-                onChange={handleInputChange}
-                required
-                className="w-full outline-none"
-              />
-            </div>
-
-            <div className="flex items-center border rounded p-3">
-              <EnvelopeIcon className="h-5 w-5 text-gray-400 mr-3" />
-              <input
-                type="email"
-                name="email"
-                placeholder="Email Address"
-                value={formData.email}
-                onChange={handleInputChange}
-                required
-                className="w-full outline-none"
-              />
-            </div>
-
-            <div className="flex items-center border rounded p-3">
-              <PhoneIcon className="h-5 w-5 text-gray-400 mr-3" />
-              <input
-                type="tel"
-                name="phone"
-                placeholder="Phone Number"
-                value={formData.phone}
-                onChange={handleInputChange}
-                required
-                className="w-full outline-none"
-              />
-            </div>
-
-            <div className="flex items-center border rounded p-3">
-              <DocumentTextIcon className="h-5 w-5 text-gray-400 mr-3" />
-              <select
-                name="program"
-                value={formData.program}
-                onChange={handleInputChange}
-                required
-                className="w-full outline-none bg-transparent"
-              >
-                <option value="">Program of Interest</option>
-                <option value="Japanese Proficiency">Japanese Proficiency (JLPT N1-N5)</option>
-                <option value="English Proficiency">English Proficiency Training</option>
-                <option value="Language Coaching">Individual Language Coaching</option>
-                <option value="Professional Development">Professional Development Program</option>
-              </select>
-            </div>
-
-            <div className="flex items-center border rounded p-3">
-              <AcademicCapIcon className="h-5 w-5 text-gray-400 mr-3" />
-              <select
-                name="educationLevel"
-                value={formData.educationLevel}
-                onChange={handleInputChange}
-                required
-                className="w-full outline-none bg-transparent"
-              >
-                <option value="">Education Level</option>
-                <option value="High School">High School</option>
-                <option value="Undergraduate">Undergraduate</option>
-                <option value="Graduate">Graduate</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
-
-            <textarea
-              name="message"
-              placeholder="Tell us about your goals or questions"
-              value={formData.message}
-              onChange={handleInputChange}
-              rows={5}
-              className="border rounded p-3 w-full resize-none"
-            />
-
-            <button
-              type="submit"
-              className="bg-blue-800 text-white px-6 py-3 rounded w-full hover:bg-blue-700 transition"
+            {/* Application Form */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
             >
-              Submit Application
-            </button>
-          </form>
+              <h2 className="text-3xl font-bold text-gray-900 mb-8">Apply Now</h2>
+              <p className="text-gray-600 mb-8 text-lg">
+                Take the first step towards your transformation
+              </p>
 
-          {/* Success Modal */}
-          {showSuccessModal && (
-            <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50">
-              <div className="bg-white rounded-lg shadow-xl p-8 max-w-md text-center">
-                <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-                  Application submitted successfully!
-                </h2>
-                <p className="text-gray-600 mb-6">
-                  We will contact you within 2 business days.
-                </p>
-                <a
-                  href="/"
-                  className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition"
+              <form
+                name="admission"
+                method="POST"
+                action="/"
+                data-netlify="true"
+                netlify-honeypot="bot-field"
+                onSubmit={handleSubmit}
+                className="bg-white rounded-2xl p-8 shadow-lg space-y-6"
+              >
+                <input type="hidden" name="form-name" value="admission" />
+                <input type="text" name="bot-field" style={{ display: 'none' }} />
+
+                <div className="flex items-center border border-gray-300 rounded-lg p-3">
+                  <UserIcon className="h-5 w-5 text-gray-400 mr-3" />
+                  <input
+                    type="text"
+                    name="firstName"
+                    placeholder="First Name"
+                    value={formData.firstName}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full outline-none"
+                  />
+                </div>
+
+                <div className="flex items-center border border-gray-300 rounded-lg p-3">
+                  <UserIcon className="h-5 w-5 text-gray-400 mr-3" />
+                  <input
+                    type="text"
+                    name="lastName"
+                    placeholder="Last Name"
+                    value={formData.lastName}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full outline-none"
+                  />
+                </div>
+
+                <div className="flex items-center border border-gray-300 rounded-lg p-3">
+                  <EnvelopeIcon className="h-5 w-5 text-gray-400 mr-3" />
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Email Address"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full outline-none"
+                  />
+                </div>
+
+                <div className="flex items-center border border-gray-300 rounded-lg p-3">
+                  <PhoneIcon className="h-5 w-5 text-gray-400 mr-3" />
+                  <input
+                    type="tel"
+                    name="phone"
+                    placeholder="Phone Number"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full outline-none"
+                  />
+                </div>
+
+                <div className="flex items-center border border-gray-300 rounded-lg p-3">
+                  <DocumentTextIcon className="h-5 w-5 text-gray-400 mr-3" />
+                  <select
+                    name="program"
+                    value={formData.program}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full outline-none bg-transparent"
+                  >
+                    <option value="">Program of Interest</option>
+                    <option value="Japanese Proficiency">Japanese Proficiency (JLPT N1-N5)</option>
+                    <option value="English Proficiency">English Proficiency Training</option>
+                    <option value="Language Coaching">Individual Language Coaching</option>
+                    <option value="Professional Development">Professional Development Program</option>
+                  </select>
+                </div>
+
+                <div className="flex items-center border border-gray-300 rounded-lg p-3">
+                  <AcademicCapIcon className="h-5 w-5 text-gray-400 mr-3" />
+                  <select
+                    name="educationLevel"
+                    value={formData.educationLevel}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full outline-none bg-transparent"
+                  >
+                    <option value="">Education Level</option>
+                    <option value="High School">High School</option>
+                    <option value="Undergraduate">Undergraduate</option>
+                    <option value="Graduate">Graduate</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+
+                <textarea
+                  name="message"
+                  placeholder="Tell us about your goals or questions"
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  rows={5}
+                  className="border border-gray-300 rounded-lg p-3 w-full resize-none"
+                />
+
+                <button
+                  type="submit"
+                  className="bg-blue-800 text-white px-6 py-3 rounded-lg w-full hover:bg-blue-700 transition font-semibold text-lg"
                 >
-                  Return to homepage
-                </a>              
-              </div>
-            </div>
-          )}
+                  Submit Application
+                </button>
+              </form>
+            </motion.div>
+          </div>
         </div>
       </section>
+
+      {/* Success Modal */}
+      {showSuccessModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg shadow-xl p-8 max-w-md text-center">
+            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+              Application submitted successfully!
+            </h2>
+            <p className="text-gray-600 mb-6">
+              We will contact you within 2 business days.
+            </p>
+            <a
+              href="/"
+              className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition"
+            >
+              Return to homepage
+            </a>              
+          </div>
+        </div>
+      )}
     </div>
   );
 };
