@@ -46,11 +46,10 @@ const steps = [
 // Define requirements data
 const requirements = [
   "Completed application form",
-  "High school diploma or equivalent",
-  "Official transcripts",
-  "Government-issued ID",
+  "No prior experience needed",
+  "Basic internet access",
+  "ID or passport copy",
   "Proof of English proficiency (if applicable)",
-  "Two passport-sized photos"
 ];
 
 const AdmissionsPage: React.FC<AdmissionsPageProps> = ({ onPageChange }) => {
