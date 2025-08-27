@@ -20,6 +20,10 @@ const ContactPage: React.FC = () => {
   });
 
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Your Google Apps Script Web App URL
+  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxTHin3spKIGMAl_Pz2lb-yGcYLhexX3RIMeaquZBkSZqC4fCBmaaVxtYchOsfbrSP5/exec';
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -30,21 +34,46 @@ const ContactPage: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    const form = e.target as HTMLFormElement;
-    const formDataObj = new FormData(form);
-
+    
+    // Basic validation
+    if (!formData.name || !formData.email || !formData.subject || !formData.message) {
+      alert('Please fill in all required fields');
+      return;
+    }
+    
+    setIsSubmitting(true);
+    
     try {
-      await fetch('/', {
+      // Create URL encoded form data
+      const formDataToSubmit = new URLSearchParams();
+      formDataToSubmit.append('name', formData.name);
+      formDataToSubmit.append('email', formData.email);
+      formDataToSubmit.append('phone', formData.phone);
+      formDataToSubmit.append('subject', formData.subject);
+      formDataToSubmit.append('message', formData.message);
+      
+      const response = await fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(formDataObj as any).toString()
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: formDataToSubmit.toString()
       });
-
-      setShowSuccessModal(true);
-      setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+      
+      const result = await response.json();
+      
+      if (result.result === 'success') {
+        setShowSuccessModal(true);
+        setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+      } else {
+        alert('There was an error submitting the form. Please try again.');
+        console.error('Submission error:', result.error);
+      }
     } catch (error) {
       console.error('Form submission error:', error);
+      alert('There was an error submitting the form. Please try again.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -94,7 +123,6 @@ const ContactPage: React.FC = () => {
       phone: "+94 72 202 0106",
       description: "Student life, accommodation, and support services"
     },
-    
   ];
 
   const subjects = [
@@ -200,18 +228,7 @@ const ContactPage: React.FC = () => {
                 <h2 className="text-3xl font-bold text-gray-900 mb-2">Send us a Message</h2>
                 <p className="text-gray-600 mb-8">Fill out the form below and we'll get back to you as soon as possible.</p>
 
-                <form 
-                  name="contact" 
-                  method="POST" 
-                  action="/"
-                  data-netlify="true" 
-                  netlify-honeypot="bot-field"
-                  onSubmit={handleSubmit}
-                  className="space-y-6"
-                >
-                  <input type="hidden" name="form-name" value="contact" />
-                  <input type="text" name="bot-field" style={{ display: 'none' }} />
-                  
+                <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
                     <label className="text-sm font-medium text-gray-700 mb-2 block">
                       Full Name *
@@ -296,9 +313,10 @@ const ContactPage: React.FC = () => {
                     whileHover={{ scale: 1.02, y: -2 }}
                     whileTap={{ scale: 0.98 }}
                     type="submit"
-                    className="w-full bg-blue-800 text-white py-4 rounded-lg font-semibold text-lg hover:bg-blue-900 transition-colors duration-300 shadow-lg"
+                    disabled={isSubmitting}
+                    className="w-full bg-blue-800 text-white py-4 rounded-lg font-semibold text-lg hover:bg-blue-900 transition-colors duration-300 shadow-lg disabled:opacity-70 disabled:cursor-not-allowed"
                   >
-                    Send Message
+                    {isSubmitting ? 'Sending...' : 'Send Message'}
                   </motion.button>
                 </form>
               </div>
