@@ -1,0 +1,6 @@
+[[redirects]]
+  from = "/*"
+  to = "/admissions/:splat"
+  status = 200
+  force = true
+  conditions = { Host = ["admissions.shabridgecollege.com"] }
