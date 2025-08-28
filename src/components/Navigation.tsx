@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Bars3Icon, XMarkIcon, AcademicCapIcon } from '@heroicons/react/24/outline';
+import { Link, useLocation } from 'react-router-dom';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { motion, AnimatePresence } from 'framer-motion';
 
-interface NavigationProps {
-  currentPage: string;
-  onPageChange: (page: string) => void;
-}
-
-const Navigation: React.FC<NavigationProps> = ({ currentPage, onPageChange }) => {
+const Navigation: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,13 +16,17 @@ const Navigation: React.FC<NavigationProps> = ({ currentPage, onPageChange }) =>
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    setIsOpen(false); // Close mobile menu on route change
+  }, [location.pathname]);
+
   const navItems = [
-    { name: 'Home', id: 'home' },
-    { name: 'About Us', id: 'about' },
-    { name: 'Programs', id: 'programs' },
-    { name: 'Admissions', id: 'admissions' },
-    { name: 'Student Life', id: 'student-life' },
-    { name: 'Contact', id: 'contact' }
+    { name: 'Home', path: '/' },
+    { name: 'About Us', path: '/about' },
+    { name: 'Programs', path: '/programs' },
+    { name: 'Admissions', path: '/admissions' },
+    { name: 'Student Life', path: '/student-life' },
+    { name: 'Contact', path: '/contact' }
   ];
 
   return (
@@ -43,34 +44,37 @@ const Navigation: React.FC<NavigationProps> = ({ currentPage, onPageChange }) =>
           <motion.div
             whileHover={{ scale: 1.05 }}
             className="flex items-center cursor-pointer"
-            onClick={() => onPageChange('home')}
           >
-            <img
-              src="https://copilot.microsoft.com/th/id/BCO.1f8ca4b8-d89f-4850-babe-0304860379b8.png"
-              alt="Sha Bridge College Logo"
-              className="h-12 w-auto mr-2"
+            <Link to="/" className="flex items-center">
+              <img
+                src="https://copilot.microsoft.com/th/id/BCO.1f8ca4b8-d89f-4850-babe-0304860379b8.png"
+                alt="Sha Bridge College Logo"
+                className="h-12 w-auto mr-2"
               />
-            <span className="text-xl font-bold text-blue-800">Sha Bridge College</span>   
-            
+              <span className="text-xl font-bold text-blue-800">Sha Bridge College</span>
+            </Link>
           </motion.div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
-              {navItems.map((item) => (
-                <motion.button
-                  key={item.id}
+              {navItems.map(({ name, path }) => (
+                <motion.div
+                  key={path}
                   whileHover={{ y: -2 }}
                   whileTap={{ scale: 0.95 }}
-                  onClick={() => onPageChange(item.id)}
-                  className={`px-3 py-2 text-sm font-medium transition-colors duration-200 ${
-                    currentPage === item.id
-                      ? 'text-blue-800 border-b-2 border-blue-800'
-                      : 'text-gray-700 hover:text-blue-800'
-                  }`}
                 >
-                  {item.name}
-                </motion.button>
+                  <Link
+                    to={path}
+                    className={`px-3 py-2 text-sm font-medium transition-colors duration-200 ${
+                      location.pathname === path
+                        ? 'text-blue-800 border-b-2 border-blue-800'
+                        : 'text-gray-700 hover:text-blue-800'
+                    }`}
+                  >
+                    {name}
+                  </Link>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -102,22 +106,19 @@ const Navigation: React.FC<NavigationProps> = ({ currentPage, onPageChange }) =>
             className="md:hidden bg-white border-t shadow-lg"
           >
             <div className="px-2 pt-2 pb-3 space-y-1">
-              {navItems.map((item) => (
-                <motion.button
-                  key={item.id}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => {
-                    onPageChange(item.id);
-                    setIsOpen(false);
-                  }}
-                  className={`block w-full text-left px-3 py-2 text-base font-medium transition-colors duration-200 ${
-                    currentPage === item.id
-                      ? 'text-blue-800 bg-blue-50'
-                      : 'text-gray-700 hover:text-blue-800 hover:bg-gray-50'
-                  }`}
-                >
-                  {item.name}
-                </motion.button>
+              {navItems.map(({ name, path }) => (
+                <motion.div key={path} whileTap={{ scale: 0.95 }}>
+                  <Link
+                    to={path}
+                    className={`block w-full text-left px-3 py-2 text-base font-medium transition-colors duration-200 ${
+                      location.pathname === path
+                        ? 'text-blue-800 bg-blue-50'
+                        : 'text-gray-700 hover:text-blue-800 hover:bg-gray-50'
+                    }`}
+                  >
+                    {name}
+                  </Link>
+                </motion.div>
               ))}
             </div>
           </motion.div>
@@ -128,3 +129,4 @@ const Navigation: React.FC<NavigationProps> = ({ currentPage, onPageChange }) =>
 };
 
 export default Navigation;
+
