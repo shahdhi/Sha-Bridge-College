@@ -1,4 +1,4 @@
 [[redirects]]
-  from = "/admissions/*"
-  to = "/admissions/index.html"
+  from = "/*"
+  to = "/index.html"
   status = 200
